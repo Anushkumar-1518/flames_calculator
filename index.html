@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLAMES GAME</title>
+    
+    <style>
+        body{
+            background-image: url("https://media.allure.com/photos/60abf9d8db7427c0a5efd1b3/16:9/w_1920,c_limit/twin%20flame.jpg");
+
+        }
+        .pos{
+            position: relative;
+            top: 150px;
+            left: 30px;
+        }
+        .detailbox{
+            background-color: rgba(0,0,0, 0.61);
+            backdrop-filter: blur(1px);
+            box-shadow: 2px;
+            border-radius: 10px;
+            width: 28%;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            padding: 35px;
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
+        #fname:hover{
+            background-color: rgb(98, 27, 121);
+            cursor: pointer;
+        }
+        #fname{
+            width: 300px;
+            height: 25px;
+            background-color: rgb(37, 48, 48);
+            border: 2px solid grey;
+            color: white;
+            font-weight: 900;
+            text-align: center;
+            border-radius: 10px;
+
+        }
+        #sname:hover{
+            background-color: rgb(98, 27, 121);
+            cursor: pointer;
+        }
+        #sname{
+            width: 300px;
+            height: 25px;
+            background-color: rgb(37, 48, 48);
+            border: 2px solid grey;
+            border-radius: 10px;
+            color: white;
+            font-weight: 900;
+            text-align: center;
+        }
+        .names{
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            background-color: azure;
+            height: 150px;
+            width: 430px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+        }
+        #fun:hover{
+            background-color: green;
+            cursor: grabbing;
+        }
+        #fun{
+            background-color: rgb(114, 37, 50);
+            color: white;
+            font-weight: 900;
+            border-radius: 7px;
+            border: 2px solid yellow;
+            width: 250px;
+            height: 50px;
+        }
+        .click{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-left: 90px;
+        }
+        .res{
+            width: 500px;
+            position: absolute;
+            right: 190px;
+            top: 250px;
+            border-radius: 20px;
+            backdrop-filter: blur(2px);
+        }
+     #output{
+        font-size: xx-large;
+        font-weight: 1500;
+        font-family: cursive;
+        color: aliceblue;
+        background-color: rgb(247, 67, 67);
+        text-align: center;
+        border-radius: 4px;
+        border: 0px solid white;
+     }
+     .header{
+        width: 100%;
+        height: 100px;
+        background-color: lightgray;
+        color: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid red;
+     }
+     .title{
+        font-size: xx-large;
+        font-weight:900px ;
+        font-family: fantasy;
+         }
+    </style>
+</head>
+<body>
+    <div class="header">
+       <p class="title"> <big>FLAMES CALCULATOR</big></p>
+    </div>
+    <p></p>
+    <div class="pos">
+    <div class="detailbox">
+        <div class="names">
+                <input type="text" id="fname" placeholder="ENTER FIRST PERSON NAME">
+                <input type="text" id="sname" placeholder="ENTER SECOND PERSON NAME">
+        </div>
+        <div class="click">
+        <button id="fun" onclick="calculate()">CALCULATE FLAMES</button>
+        </div>
+    </div>
+</div>
+<div class="res">
+    <p></p>
+    <p id="output"></p>
+</div>
+<script>
+    function calculate() {
+    let name1 = document.getElementById("fname").value;
+    let name2 = document.getElementById("sname").value;
+    n1 = name1.toLowerCase();
+    n2 = name2.toLowerCase();
+    n1 = n1.replaceAll(' ','');
+    n2 = n2.replaceAll(' ','');
+    
+    let totallength = n1.length + n2.length;
+    let cancel = 0;
+  
+    // Removing common characters between names
+    for (let i = 0; i < n1.length; i++) {
+      for (let j = 0; j < n2.length; j++) {
+        if (n1.charAt(i) == n2.charAt(j)) {
+          n2 = n2.replace(n2.charAt(j), "");
+          cancel++;
+          break; // Break after removing a common character
+        }
+      }
+    }
+  
+    let flamescore = totallength - (cancel * 2);
+    let f = "flames";
+    
+    // Flames score calculation logic
+    while (f.length > 1) {
+      let index = (flamescore % f.length) - 1;
+      if (index >= 0) {
+        f = f.substring(0, index) + f.substring(index + 1);
+      } else {
+        f = f.substring(0, f.length - 1);
+      }
+    }
+  
+    // Displaying result based on the final remaining letter
+    switch (f) {
+      case "f":
+        document.getElementById("output").innerHTML = 'The relationship between both will end in FRIENDSHIP👫';
+        break;
+      case "l":
+        document.getElementById("output").innerHTML = "The relationship between both end in LOVE👩🏼‍❤‍👨🏽";
+        break;
+      case "a":
+        document.getElementById("output").innerHTML = "The relationship between both end in AFFECTION🫶";
+        break;
+      case "m":
+        document.getElementById("output").innerHTML = "The relationship between both end in MARRIAGE👰🏻🤵🏻";
+        break;
+      case "e":
+        document.getElementById("output").innerHTML = "The relationship between both end in ENEMIES⚔️";
+        break;
+      case "s":
+        document.getElementById("output").innerHTML = "The relationship between both end in SIBLINGS👧🏻👶🏻";
+        break;
+    }
+  }
+</script>
+</body>
+</html>
